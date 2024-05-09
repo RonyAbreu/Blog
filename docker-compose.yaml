@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+
+  db:
+    container_name: container-database-blog
+    image: postgres:16
+    restart: always
+    env_file:
+      - db.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data: {}
