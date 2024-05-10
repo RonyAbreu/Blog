@@ -57,7 +57,7 @@ public class PostService {
         return posts.stream().map(Post::entityToResponse).toList();
     }
 
-    public PostResponse findPostById(Long postId){
+    public PostResponse findPostById(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new EntityNotFoundException("Post não encontrado!"));
 
