@@ -1,9 +1,8 @@
 package com.ronyelison.blog.entity;
 
+import com.ronyelison.blog.dto.comment.CommentResponse;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "tb_comment")
 public class Comment {
@@ -13,12 +12,17 @@ public class Comment {
     private String text;
     @ManyToOne
     private User creator;
-    @ManyToMany
-    private List<Post> posts = new ArrayList<>();
+    @ManyToOne
+    private Post post;
 
-    public Comment(String text, User creator) {
+    public Comment(String text, User creator, Post post) {
         this.text = text;
         this.creator = creator;
+        this.post = post;
+    }
+
+    public CommentResponse entityToResponse() {
+        return new CommentResponse(id, text,post.entityToResponse(), creator.entityToResponse());
     }
 
     public Long getId() {
@@ -33,7 +37,7 @@ public class Comment {
         return creator;
     }
 
-    public List<Post> getPosts() {
-        return posts;
+    public Post getPost() {
+        return post;
     }
 }

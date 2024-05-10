@@ -1,8 +1,10 @@
 package com.ronyelison.blog.repository;
 
 import com.ronyelison.blog.entity.Comment;
-import com.ronyelison.blog.entity.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CommentRepository extends CrudRepository<Comment,Long> {
+import java.util.List;
+
+public interface CommentRepository extends JpaRepository<Comment,Long> {
+    List<Comment> findByPostId(Long id);
 }
