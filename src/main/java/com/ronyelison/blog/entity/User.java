@@ -1,5 +1,7 @@
 package com.ronyelison.blog.entity;
 
+import com.ronyelison.blog.dto.user.UserRequest;
+import com.ronyelison.blog.dto.user.UserResponse;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -22,10 +24,14 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "creator")
     private List<Comment> comments = new ArrayList<>();
 
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public User(UserRequest userRequest) {
+        this.name = userRequest.name();
+        this.email = userRequest.email();
+        this.password = userRequest.password();
+    }
+
+    public UserResponse entityToResponse() {
+        return new UserResponse(id,name,email);
     }
 
     @Override
@@ -64,4 +70,6 @@ public class User implements Serializable {
     public List<Comment> getComments() {
         return comments;
     }
+
+
 }
