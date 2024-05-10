@@ -1,5 +1,6 @@
 package com.ronyelison.blog.entity;
 
+import com.ronyelison.blog.dto.post.PostResponse;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -11,18 +12,21 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String body;
+    private String content;
     @ManyToOne
     private User creator;
-    @ManyToMany
+    @OneToMany
     private List<Comment> comments = new ArrayList<>();
 
-    public Post(String title, String body, User creator) {
+    public Post(String title, String content, User creator) {
         this.title = title;
-        this.body = body;
+        this.content = content;
         this.creator = creator;
     }
 
+    public PostResponse entityToResponse() {
+        return new PostResponse(id, title, content, creator.entityToResponse());
+    }
     public Long getId() {
         return id;
     }
@@ -31,8 +35,8 @@ public class Post {
         return title;
     }
 
-    public String getBody() {
-        return body;
+    public String getContent() {
+        return content;
     }
 
     public User getCreator() {
@@ -41,5 +45,13 @@ public class Post {
 
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

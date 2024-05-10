@@ -1,8 +1,7 @@
 package com.ronyelison.blog.repository;
 
 import com.ronyelison.blog.entity.Post;
-import com.ronyelison.blog.entity.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PostRepository extends CrudRepository<Post,Long> {
+public interface PostRepository extends JpaRepository<Post,Long> {
 }
