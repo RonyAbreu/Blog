@@ -5,14 +5,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UserRequest(
-        @NotBlank
-        @Size(min = 3, max = 30)
+        @NotBlank(message = "Campo obrigatório")
+        @Size(min = 3, max = 30, message = "Caracteres inválidos 3-30")
         String name,
-        @NotBlank
-        @Email
+        @NotBlank(message = "Campo obrigatório")
+        @Email(message = "Email inválido")
+        @Size(min = 3, max = 255, message = "Caracteres inválidos 3-255")
         String email,
-        @NotBlank
-        @Size(min = 8, max = 20)
+        @NotBlank(message = "Campo obrigatório")
+        @Size(min = 8, max = 20, message = "Caracteres inválidos 8-20")
         String password
 ) {
 }
