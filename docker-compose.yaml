@@ -4,7 +4,7 @@ services:
 
   db:
     container_name: container-database-blog
-    image: postgres:16
+    image: postgres:latest
     restart: always
     env_file:
       - db.env
