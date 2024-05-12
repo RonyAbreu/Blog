@@ -2,8 +2,23 @@ version: '3.5'
 
 services:
 
+  blog-api:
+    container_name: container-api-blog
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - db.env
+    ports:
+      - "8080:8080"
+    networks:
+      - blog-network
+
   db:
     container_name: container-database-blog
+    depends_on:
+      - blog-api
     image: postgres:latest
     restart: always
     env_file:
@@ -12,6 +27,13 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      - blog-network
 
 volumes:
   db_data: {}
+
+networks:
+  blog-network:
+    name: blog-network
+    driver: bridge
