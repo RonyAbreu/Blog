@@ -24,6 +24,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "creator")
     private List<Comment> comments = new ArrayList<>();
 
+    public User() {
+    }
+
     public User(UserRequest userRequest) {
         this.name = userRequest.name();
         this.email = userRequest.email();

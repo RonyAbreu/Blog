@@ -15,8 +15,11 @@ public class Post {
     private String content;
     @ManyToOne
     private User creator;
-    @OneToMany
+    @OneToMany(mappedBy = "post")
     private List<Comment> comments = new ArrayList<>();
+
+    public Post() {
+    }
 
     public Post(String title, String content, User creator) {
         this.title = title;

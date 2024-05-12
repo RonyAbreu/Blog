@@ -15,6 +15,9 @@ public class Comment {
     @ManyToOne
     private Post post;
 
+    public Comment() {
+    }
+
     public Comment(String text, User creator, Post post) {
         this.text = text;
         this.creator = creator;
